@@ -55,7 +55,9 @@ const createWindow = () => {
 };
 
 function startLaravelServer() {
-  const phpPath = path.join(__dirname, 'resources/php/php'); // Updated to use Linux binary
+  // const env = { ...process.env };
+  // env.LD_LIBRARY_PATH = path.join(process.resourcesPath, 'php', 'lib');
+  const phpPath = path.join(__dirname, 'resources/php/php.exe'); // Updated to use Linux binary
 
   console.log(phpPath)
 
