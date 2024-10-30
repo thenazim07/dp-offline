@@ -1,0 +1,15 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" width="133.445" height="149.867" viewBox="0 0 133.445 149.867">
+  <g id="Group_3006" data-name="Group 3006" transform="translate(-1687.5 -2882.315)">
+    <path id="Path_1682" data-name="Path 1682" d="M1862.043,2931.1a9.87,9.87,0,0,0-9.892,9.882l.036,116.042a9.893,9.893,0,0,0,9.9,9.9l66.259-.026a9.88,9.88,0,0,0,9.9-9.9l-.044-116.038a9.872,9.872,0,0,0-9.9-9.882Z" transform="translate(-117.297 -34.74)" fill="#474646"/>
+    <path id="Path_1683" data-name="Path 1683" d="M1998.279,3369.584a2.443,2.443,0,1,1-2.437-2.438A2.44,2.44,0,0,1,1998.279,3369.584Z" transform="translate(-217.918 -345.393)" fill="#4285f4"/>
+    <path id="Path_1684" data-name="Path 1684" d="M1946.656,2978a2.746,2.746,0,0,0-2.7-2.778l-69.153.024a2.752,2.752,0,0,0-2.721,2.778l.031,102.717a2.76,2.76,0,0,0,2.726,2.788l69.153-.025a2.728,2.728,0,0,0,2.7-2.783Z" transform="translate(-131.495 -66.19)" fill="#f5f5f5"/>
+    <path id="Path_1686" data-name="Path 1686" d="M1906.954,2978c0-1.527-.566-2.778-1.263-2.778l-32.337.024c-.7,0-1.273,1.249-1.273,2.778l.015,102.717c0,1.541.573,2.788,1.275,2.788l32.338-.025c.7,0,1.269-1.244,1.262-2.783Z" transform="translate(-131.496 -66.19)" fill="#fff" opacity="0.52"/>
+    <g id="Group_3005" data-name="Group 3005" transform="translate(1687.5 2882.315)">
+      <path id="Path_1685" data-name="Path 1685" d="M1692.127,2882.315h84.381a4.628,4.628,0,0,1,4.627,4.627v57.408a4.627,4.627,0,0,1-4.627,4.627h-14.26l9.01,21.545-22.669-21.545h-56.461a4.629,4.629,0,0,1-4.627-4.627v-57.408A4.63,4.63,0,0,1,1692.127,2882.315Z" transform="translate(-1687.5 -2882.315)" fill="#4285f4"/>
+      <rect id="Rectangle_2168" data-name="Rectangle 2168" width="74.298" height="5.359" transform="translate(9.668 14.025)" fill="#fff"/>
+      <rect id="Rectangle_2169" data-name="Rectangle 2169" width="74.298" height="5.359" transform="translate(9.668 24.043)" fill="#fff"/>
+      <rect id="Rectangle_2170" data-name="Rectangle 2170" width="74.298" height="5.358" transform="translate(9.668 34.062)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

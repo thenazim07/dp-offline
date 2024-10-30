@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  pre_build:
+    on-failure: ABORT
+    commands:
+      - echo "Importing env file..." | tee -a .cicd/build.log
+      - cp $CODEBUILD_SRC_DIR_EnvArtifact/*env .env 2>&1 | tee -a .cicd/build.log
+  
+  build:
+    on-failure: ABORT
+    commands:
+      - pnpm install 2>&1 | tee -a .cicd/build.log
+      - pnpm run build 2>&1 | tee -a .cicd/build.log
+      
+artifacts:
+  enable-symlinks: yes  
+  files:
+    - '**/*'
+    - .cicd/build.log

@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-text-base: 19, 106, 251;
+        --color-text-muted: 199, 210, 254;
+        --color-text-inverted: 79, 70, 229;
+        --color-text-dark: 30, 41, 59;
+
+        --color-fill: 19, 106, 251;
+
+        --color-button-accent: 19, 106, 251;
+        --color-button-accent-hover: 17, 97, 230;
+        --color-button-muted: 99, 102, 241;
+        --color-background-for-page: 248, 250, 252;
+
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+    }
+}
+
+html {
+    overflow: auto;
+    scrollbar-gutter: stable !important;
+    scroll-behavior: smooth;
+}
+
+/*
+|--------------------------------------------------------------------------
+| all input autocomplete background color removed
+|--------------------------------------------------------------------------
+*/
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+@layer base {
+    input[type='text'],
+    input[type='password'],
+    input[type='email'],
+    input[type='number'],
+    input[type='url'],
+    input[type='date'],
+    input[type='search'],
+    select,
+    select[multiple],
+    textarea {
+        @apply border border-slate-200;
+    }
+
+    [type='checkbox'] {
+        @apply h-5 w-5 rounded border-gray-200 text-blue-600 focus:ring-blue-500;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.form-control {
+    @apply block w-full appearance-none rounded-md border bg-transparent px-3 py-3   text-base font-medium text-gray-900 focus:outline-none focus:ring-0 !important;
+}
+
+.form-control-for-on-examination {
+    @apply block w-full appearance-none rounded-md border bg-transparent px-3 py-2.5   text-base font-medium text-gray-900 focus:outline-none focus:ring-0 !important;
+}
+
+.form-control-for-on-medicine {
+    @apply block w-full appearance-none rounded-md border bg-white px-3 py-2.5   text-base font-medium text-gray-900 focus:outline-none focus:ring-0 !important;
+}
+
+.form-control-for-base input {
+    @apply w-full appearance-none rounded-md border border-transparent bg-white px-3   text-base font-medium text-gray-900 focus:border-transparent focus:outline-none focus:ring-0 !important;
+}
+
+.list-box-button {
+    @apply relative w-full cursor-default px-3 py-3.5 text-left focus:outline-none focus-visible:border-blue-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-blue-300 sm:text-sm !important;
+}
+
+.group-input {
+    @apply block w-full appearance-none rounded-md border border-none bg-transparent px-3 py-1.5   text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 2xl:text-base !important;
+}
+
+.dropdown-input {
+    @apply block w-full appearance-none bg-white   text-sm font-medium text-gray-900 focus:outline-none focus:ring-0 2xl:text-base !important;
+}

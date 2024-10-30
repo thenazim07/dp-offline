@@ -1,0 +1,44 @@
+options:
+    pool:
+        name: projects/doctime-development-386516/locations/asia-southeast1/workerPools/cloudbuild-private-pool-dt-dev
+steps:
+    - name: 'gcr.io/cloud-builders/git'
+      args:
+          - 'clone'
+          - '--branch'
+          - 'dev'
+          - 'https://${_GIT_USER}:${_GIT_AUTH_TOKEN}@github.com/media365/doctime-rx-frontend.git'
+          - '/workspace/doctime-rx-frontend'
+    # Delete existing my-repo folder on cicd-dev-server
+    - name: 'gcr.io/cloud-builders/gcloud'
+      id: Delete Repo Folder
+      entrypoint: 'bash'
+      args:
+          - '-c'
+          - |
+              set -x
+              gcloud compute ssh --internal-ip doctime-dev-server-rx --zone=asia-southeast1-b --command "if [ -d '/var/www/releases/doctime-rx-frontend' ]; then rm -rf /var/www/releases/doctime-rx-frontend; fi"
+
+    - name: 'gcr.io/cloud-builders/gcloud'
+      entrypoint: 'bash'
+      args:
+          - '-c'
+          - |
+              set -x
+              gcloud compute scp --internal-ip --zone=asia-southeast1-b --recurse /workspace/doctime-rx-frontend doctime-dev-server-rx:/var/www/releases/
+
+      # Execute deploy_laravel.sh script on cicd-dev-server
+    - name: 'gcr.io/cloud-builders/gcloud'
+      id: Execute Deploy Script
+      entrypoint: '/bin/bash'
+      args:
+          - '-c'
+          - |
+              set -x
+              gcloud compute ssh --internal-ip doctime-dev-server-rx --zone=asia-southeast1-b --command "cp /var/www/env-files/doctime-rx-frontend/.env /var/www/releases/doctime-rx-frontend"
+
+              gcloud compute ssh --internal-ip doctime-dev-server-rx --zone=asia-southeast1-b --command "cd /var/www/releases/doctime-rx-frontend/scripts && bash after_install.sh"
+              gcloud compute ssh --internal-ip doctime-dev-server-rx --zone=asia-southeast1-b --command "echo 'doctime-rx-frontend develop Release Done!'"
+substitutions:
+    _GIT_AUTH_TOKEN: $GIT_AUTH_TOKEN
+    _GIT_USER: $GIT_USER

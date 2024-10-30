@@ -1,0 +1,25 @@
+export type Patient = {
+    id: number;
+    personal_info_id: number;
+    parent_id?: any;
+    title: string;
+    name: string;
+    gender: string;
+    contact_no: string;
+    email: string;
+    weight: number;
+    dob: string;
+    is_generated_dob: boolean;
+    age: number;
+    age_month: number;
+    disease: string;
+    last_visit_date: string;
+    nid_no: string;
+    address: string;
+    referred_by: string;
+    reg_no: string;
+    height_in_feet: number;
+    height_in_inch: number;
+    blood_group?: any;
+    operating_patients: any[];
+};
