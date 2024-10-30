@@ -72,7 +72,8 @@ function startLaravelServer() {
 
   const laravelCommand = `${phpPath} -S localhost:8888 -t ${path.join(__dirname, 'server/public')}`;
   
-  exec(laravelCommand, {env}, (error, stdout, stderr) => {
+  // exec(laravelCommand, {env}, (error, stdout, stderr) => {
+  exec(laravelCommand, (error, stdout, stderr) => {
     if (error) {
       console.error('Error starting Laravel:', error);
       return;
