@@ -3,9 +3,11 @@
 const { app, BrowserWindow } = require('electron');
 const { exec } = require('child_process');
 const path = require('path');
+const os = require('os');
 const express = require('express');
 const http = require('http');
 const serveStatic = require('serve-static');
+const { KeepAlive } = require('vue');
 
 let mainWindow;
 
@@ -55,15 +57,22 @@ const createWindow = () => {
 };
 
 function startLaravelServer() {
+  const port =  8000
+  const host = '127.0.0.1'
+  const serverUrl = `http://${host}:${port}`
+
+  
   // const env = { ...process.env };
   // env.LD_LIBRARY_PATH = path.join(process.resourcesPath, 'php', 'lib');
-  const phpPath = path.join(__dirname, 'resources/php/php.exe'); // Updated to use Linux binary
+  // env.LD_LIBRARY_PATH = path.join(__dirname, 'resources/php/lib');
+  const phpPath = path.join(__dirname, 'resources/php/win-php/php.exe'); // Updated to use Linux binary
 
-  console.log(phpPath)
+  // console.log('env', env.LD_LIBRARY_PATH)
+  console.log('php path', phpPath)
 
-  const laravelCommand = `${phpPath} -S localhost:8000 -t ${path.join(__dirname, 'server/public')}`;
+  const laravelCommand = `${phpPath} -S localhost:8888 -t ${path.join(__dirname, 'server/public')}`;
   
-  exec(laravelCommand, (error, stdout, stderr) => {
+  exec(laravelCommand, {env}, (error, stdout, stderr) => {
     if (error) {
       console.error('Error starting Laravel:', error);
       return;
