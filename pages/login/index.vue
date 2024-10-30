@@ -117,6 +117,7 @@ const onSubmit = async (value: any, actions: any) => {
                                     >
                                         Forgot Password?
                                     </NuxtLink>
+                                    <a href="http://localhost:8000"> Backend </a>
                                 </div>
                             </div>
 
