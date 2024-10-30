@@ -1,6 +1,7 @@
 // main.js
 
 const { app, BrowserWindow } = require('electron');
+const { exec } = require('child_process');
 const path = require('path');
 const express = require('express');
 const http = require('http');
