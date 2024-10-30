@@ -55,7 +55,9 @@ const createWindow = () => {
 };
 
 function startLaravelServer() {
-  const phpPath = path.join(__dirname, 'resources/php/php.exe'); // Updated to use Linux binary
+  const phpPath = path.join(__dirname, 'resources/php/php'); // Updated to use Linux binary
+
+  console.log(phpPath)
 
   const laravelCommand = `${phpPath} -S localhost:8000 -t ${path.join(__dirname, 'server/public')}`;
   
@@ -80,6 +82,7 @@ function startNuxtServer() {
 
 // App is ready, start server and create window
 app.whenReady().then(() => {
+  startLaravelServer();
   startNuxtServer();
   createWindow();
 
