@@ -65,7 +65,19 @@ function startLaravelServer() {
   // const env = { ...process.env };
   // env.LD_LIBRARY_PATH = path.join(process.resourcesPath, 'php', 'lib');
   // env.LD_LIBRARY_PATH = path.join(__dirname, 'resources/php/lib');
-  const phpPath = path.join(__dirname, 'resources/php/win-php/php.exe'); // Updated to use Linux binary
+  let executionPath;
+  const osType = os.type();
+  console.log('os', osType);
+  if (osType == 'Linux') {
+    executionPath = 'resources/php/php';
+  }
+  if (osType == 'Darwin') {
+    executionPath = 'resources/php/php';
+  }
+  if (osType == 'Windows_NT') {
+    executionPath = 'resources/php/win-php/php.exe';
+  }
+  const phpPath = path.join(__dirname, executionPath); // Updated to use Linux binary
 
   // console.log('env', env.LD_LIBRARY_PATH)
   console.log('php path', phpPath)
