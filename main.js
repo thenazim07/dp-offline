@@ -1,7 +1,7 @@
 // main.js
 
 const { app, BrowserWindow } = require('electron');
-const { exec } = require('child_process');
+const { spawn, exec } = require('child_process');
 const path = require('path');
 const os = require('os');
 const express = require('express');
@@ -17,6 +17,8 @@ const createWindow = () => {
     width: 800,
     height: 600,
     webPreferences: {
+      contextIsolation: true, // or false, depending on your setup
+      enableRemoteModule: true, // if needed
       preload: path.join(__dirname, 'preload.js')
     }
   });
@@ -43,9 +45,13 @@ const createWindow = () => {
   const isDev = !app.isPackaged;
 
   // Open DevTools only in development
-  if (isDev) {
+  // if (isDev) {
+  //   mainWindow.webContents.openDevTools();
+  // }
+   // Open DevTools after the window loads
+   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.webContents.openDevTools();
-  }
+});
 
   mainWindow.webContents.on('did-fail-load', (event, errorCode, errorDescription, validatedURL) => {
     console.error(`Failed to load ${validatedURL}: ${errorDescription}`);
@@ -55,16 +61,39 @@ const createWindow = () => {
     console.error('The app has crashed.');
   });
 };
+let phpServer;
+function startPhpServer(phpPath) {
+  // Adjust the command as needed for your environment
+  phpServer = spawn(phpPath, ['-S', 'localhost:8001']); // Change port as needed
 
+  phpServer.stdout.on('data', (data) => {
+      console.log(`PHP Server: ${data}`);
+  });
+
+  phpServer.stderr.on('data', (data) => {
+      console.error(`PHP Server Error: ${data}`);
+  });
+
+  phpServer.on('close', (code) => {
+      console.log(`PHP server exited with code ${code}`);
+  });
+}
+
+
+function stopPhpServer() {
+  if (phpServer) {
+      phpServer.kill(); // Stop the server
+      phpServer = null; // Reset the reference
+  }
+}
+function restartPhpServer() {
+  stopPhpServer(); // Stop the server
+  setTimeout(() => {
+      startPhpServer(); // Restart the server after a brief pause
+  }, 1000); // Adjust timeout as necessary
+}
 function startLaravelServer() {
-  const port =  8000
-  const host = '127.0.0.1'
-  const serverUrl = `http://${host}:${port}`
 
-  
-  // const env = { ...process.env };
-  // env.LD_LIBRARY_PATH = path.join(process.resourcesPath, 'php', 'lib');
-  // env.LD_LIBRARY_PATH = path.join(__dirname, 'resources/php/lib');
   let executionPath;
   const osType = os.type();
   console.log('os', osType);
@@ -75,12 +104,12 @@ function startLaravelServer() {
     executionPath = 'resources/php/php';
   }
   if (osType == 'Windows_NT') {
-    executionPath = 'resources/php/win-php/php.exe';
+    executionPath = 'executables/php/win-php/php.exe';
   }
-  const phpPath = path.join(__dirname, executionPath); // Updated to use Linux binary
+  const phpPath = path.join(process.resourcesPath, executionPath); // Updated to use Linux binary
 
-  // console.log('env', env.LD_LIBRARY_PATH)
-  console.log('php path', phpPath)
+  // startPhpServer(phpPath);
+  
 
   const laravelCommand = `${phpPath} -S localhost:8888 -t ${path.join(__dirname, 'server/public')}`;
   
@@ -106,6 +135,7 @@ function startNuxtServer() {
 
 // App is ready, start server and create window
 app.whenReady().then(() => {
+  // restartPhpServer();
   startLaravelServer();
   startNuxtServer();
   createWindow();

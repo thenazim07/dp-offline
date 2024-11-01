@@ -5,7 +5,7 @@ module.exports = {
   packagerConfig: {
     extraResource: [
           ".output",
-          "resources/php"
+          "executables"
     ],
     asar: true,
   },
